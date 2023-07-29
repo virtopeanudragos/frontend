@@ -1,0 +1,12 @@
+<div class="collapsible-container">
+
+  <div class="collapsible-rectangle" (click)="toggleAnalyticsTable()">
+    <div class="student-name">{{ studentName }}</div>
+  </div>
+  <div class="analytics-table-container" [ngClass]="{ 'expanded': isAnalyticsTableVisible }">
+    <ng-container *ngIf="isAnalyticsTableVisible">
+      <app-analytics-table></app-analytics-table>
+    </ng-container>
+  </div>
+
+</div>

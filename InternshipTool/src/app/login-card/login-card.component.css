@@ -1,0 +1,118 @@
+.login-card {
+  width: 400px;
+  height: 500px;
+  background-color: #f1f1f1;
+  padding: 20px;
+  box-shadow: 0 2px 4px 0 #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.top-half,
+.bottom-half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-half {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottom-half {
+  position: relative;
+}
+
+.custom-dropdown {
+  color: #433F3F;
+  width: 330px;
+  height: 60px;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.dropdown-label {
+  flex: 1;
+  font-size: 20px;
+}
+
+.dropdown-arrow {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #000;
+  margin-left: 10px;
+
+}
+
+.custom-dropdown select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-dropdown option {
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  opacity: 0.5;
+}
+
+
+.login-button {
+  width: 200px;
+  height: 60px;
+  background-color: #1F6FBF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 23px;
+  box-shadow: 0 4px 8px 0 #1F6FBF;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.login-button:hover {
+  transform: rotate(360deg);
+  transform: scale(1.06);
+}

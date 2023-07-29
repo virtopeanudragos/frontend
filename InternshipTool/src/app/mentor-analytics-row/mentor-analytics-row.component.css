@@ -1,0 +1,37 @@
+.row-card {
+  width: 80%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2px;
+}
+
+.row-card button {
+  background-color: #1F6FBF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.row-card button:hover {
+  transform: scale(1.06);
+}
+
+.row-card .attendance input[type="checkbox"] {
+  margin-right: 5px;
+  width: 20px;
+}
+
+.row-card .grade input[type="text"] {
+  width: 40px;
+  height: 20px;
+}
+
+

@@ -1,0 +1,9 @@
+.logo-container {
+  width: 500px;
+}
+
+.logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+

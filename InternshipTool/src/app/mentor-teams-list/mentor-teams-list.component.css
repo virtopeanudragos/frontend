@@ -1,0 +1,11 @@
+.collapsible-container {
+  height: 100%;
+  width: 100%;
+  top: 180px;
+  left: 0;
+  right: 0;
+  position: fixed;
+  overflow-y: auto;
+  background-color: #D9D9D9;
+  max-height: calc(100vh - 180px);
+}

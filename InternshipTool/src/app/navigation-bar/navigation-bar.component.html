@@ -1,0 +1,22 @@
+
+<!--<div class="navbar">
+  <button class="navbar-button my-team" *ngIf="userRole === 'student' || userRole === 'teamLeader'">My Team</button>
+  <button class="navbar-button analytics" *ngIf="userRole === 'student' || userRole === 'teamLeader'">Analytics</button>
+  <button class="navbar-button team-analytics" *ngIf="userRole === 'teamLeader'">Team Analytics</button>
+  <button class="navbar-button teams" *ngIf="userRole === 'mentor'">Teams</button>
+  <button class="navbar-button activities" *ngIf="userRole === 'mentor'">Activities</button>
+  <button class="navbar-button sessions" *ngIf="userRole === 'mentor'">Sessions</button>
+  <button class="navbar-button logout-button" (click)="logout()">Logout</button>
+</div>-->
+
+
+<div class="navbar">
+  <button class="navbar-button my-team" *ngIf="userRole === 'Student' || userRole === 'Team Leader'" (click)="navigateTo('leader-team')">My Team</button>
+  <button class="navbar-button analytics" *ngIf="userRole === 'Student' || userRole === 'Team Leader'" (click)="navigateTo('student-analytics')">Analytics</button>
+  <button class="navbar-button team-analytics" *ngIf="userRole === 'Team Leader'" (click)="navigateTo('leader-teamAnalytics')">Team Analytics</button>
+  <button class="navbar-button teams" *ngIf="userRole === 'Mentor'" (click)="navigateTo('mentor-teams')">Teams</button>
+  <button class="navbar-button activities" *ngIf="userRole === 'Mentor'" (click)="navigateTo('mentor-activities')">Activities</button>
+  <button class="navbar-button sessions" *ngIf="userRole === 'Mentor'" (click)="navigateTo('mentor-sessions')">Sessions</button>
+  <button class="navbar-button logout-button" (click)="logout()">Logout</button>
+</div>
+

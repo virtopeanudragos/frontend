@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { UserRoleService } from './user-role.service';
 import { UserProfileService } from "./user-profile.service";
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -35,6 +37,7 @@ import { MentorAnalyticsRowComponent } from './mentor-analytics-row/mentor-analy
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MentorSessionsComponent } from './mentor-sessions/mentor-sessions.component';
 import { CollapsibleMentorSessionsComponent } from './collapsible-mentor-sessions/collapsible-mentor-sessions.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -85,7 +88,9 @@ const appRoute: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoute)
+    RouterModule.forRoot(appRoute),
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     UserRoleService,

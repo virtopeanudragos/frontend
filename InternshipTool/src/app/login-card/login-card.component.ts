@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserRoleService } from '../user-role.service';
 import { UserProfileService } from "../user-profile.service";
@@ -9,12 +9,23 @@ import { UserProfileService } from "../user-profile.service";
   templateUrl: './login-card.component.html',
   styleUrls: ['./login-card.component.css']
 })
-export class LoginCardComponent {
+export class LoginCardComponent implements OnInit {
   selectedRole: string = '';
   selectedName: string = '';
-  names: string[] = ['Andrei', 'Gabriel', 'Beni', 'Adelin', 'Dragoș'];
+  names: string[] = [];
+    constructor(
+    private userProfileService: UserProfileService,
+    private userRoleService: UserRoleService,
+    private router: Router
+  ) {}
 
-  constructor(private userProfileService: UserProfileService, private userRoleService: UserRoleService, private router: Router) {}
+  ngOnInit() {
+    this.userProfileService.fetchNames().subscribe(names => {
+      this.names = names;
+    }, error => {
+      console.error('Error:', error);
+    });
+  }
 
   login() {
     this.userProfileService.updateUserName(this.selectedName);

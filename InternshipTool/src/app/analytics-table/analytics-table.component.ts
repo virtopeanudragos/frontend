@@ -4,7 +4,8 @@ import {AnalyticsService} from "../analytics.service";
 import {LoginService} from "../login.service";
 interface StudentAnalytics{
   grade : number,
-  sessionDate: string
+  sessionDate: string,
+  activityName: string
 }
 
 @Component({
@@ -33,11 +34,13 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
 
     // @ts-ignore
     this.analyticsService.getStudent(userId).subscribe( student =>
-      this.gradesData = student.grades.map((grade: {grade: number, session: {date: string}}) => ({
+      this.gradesData = student.grades.map((grade: {grade: number, session: {date: string, activity: {name: string}}}) => ({
         grade: grade.grade,
-        sessionDate: grade.session.date
+        sessionDate: grade.session.date,
+        activityName: grade.session.activity.name
       }))
     )
+
 
   }
 

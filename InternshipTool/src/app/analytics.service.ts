@@ -13,10 +13,8 @@ export class AnalyticsService {
   private studentDetailsUrl = 'http://localhost:8080/student/';
   constructor(private http: HttpClient, private loginService: LoginService) {}
 
-  public getStudent(): Observable<any>{
-    const userId = this.loginService.getCurrentUserId();
-    console.log('User ID:' + userId);
-    return  this.http.get<any>('http://localhost:8080/student/1014');
+  public getStudent(userId: number): Observable<any>{
+    return  this.http.get<any>(this.studentDetailsUrl + userId);
   }
 }
 

@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {AnalyticsService} from "../analytics.service";
+import {LoginService} from "../login.service";
 interface StudentAnalytics{
   grade : number,
   sessionDate: string
@@ -17,11 +18,21 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
   gradesData: StudentAnalytics[] = [];
   private studentAnalyticsSubscription: Subscription | undefined;
 
-  constructor(private analyticsService: AnalyticsService) {
+  constructor(private analyticsService: AnalyticsService, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
-    this.analyticsService.getStudent().subscribe( student =>
+
+    let userId: number;
+    const userIdsubscription = this.loginService.getCurrentUserId().subscribe(
+      // @ts-ignore
+      (id: number) =>{
+        userId=id;
+      }
+    )
+
+    // @ts-ignore
+    this.analyticsService.getStudent(userId).subscribe( student =>
       this.gradesData = student.grades.map((grade: {grade: number, session: {date: string}}) => ({
         grade: grade.grade,
         sessionDate: grade.session.date

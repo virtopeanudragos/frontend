@@ -8,77 +8,8 @@
     <div class="feedback">Feedback</div>
   </div>
 
-  <div class="table-row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
-  </div>
-  <div class="table row">
-    <app-student-analytics-row></app-student-analytics-row>
+  <div *ngFor="let grade of gradesData" class="table-row">
+    <app-student-analytics-row [grade]="grade"></app-student-analytics-row>
   </div>
 
 </div>

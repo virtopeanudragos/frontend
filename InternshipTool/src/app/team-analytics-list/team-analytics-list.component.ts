@@ -12,7 +12,7 @@ export class TeamAnalyticsListComponent implements OnInit, OnDestroy {
   constructor(private loginService: LoginService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loginService.getCurrentTeamId().subscribe(teamId => {
       if (teamId) {
         this.loginService.getStudents().subscribe(allStudents => {

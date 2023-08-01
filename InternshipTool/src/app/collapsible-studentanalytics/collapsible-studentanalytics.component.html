@@ -5,7 +5,7 @@
   </div>
   <div class="analytics-table-container" [ngClass]="{ 'expanded': isAnalyticsTableVisible }">
     <ng-container *ngIf="isAnalyticsTableVisible">
-      <app-analytics-table></app-analytics-table>
+      <app-analytics-table [id] = "student.id"></app-analytics-table>
     </ng-container>
   </div>
 

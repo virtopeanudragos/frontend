@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {AnalyticsService} from "../analytics.service";
 import {LoginService} from "../login.service";
@@ -19,6 +19,8 @@ interface StudentAnalytics{
 
 
 export class AnalyticsTableComponent implements OnInit, OnDestroy{
+
+  @Input() id: any;
   gradesData: StudentAnalytics[] = [];
 
   constructor(private analyticsService: AnalyticsService, private loginService: LoginService, private activityService: ActivitiesService) {
@@ -27,12 +29,16 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
 
     let userId: number;
-    const userIdsubscription = this.loginService.getCurrentUserId().subscribe(
-      // @ts-ignore
-      (id: number) =>{
-        userId=id;
-      }
-    )
+    if(this.id == null) {
+      const userIdsubscription = this.loginService.getCurrentUserId().subscribe(
+        // @ts-ignore
+        (id: number) => {
+          userId = id;
+        }
+      )
+    }else {
+      userId = this.id;
+    }
 
     let currentActivity: String;
     const currentActivitySubscription = this.activityService.getCurrentActivity().subscribe(

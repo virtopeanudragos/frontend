@@ -7,7 +7,7 @@ import { LoginService } from '../login.service';
   styleUrls: ['./teamleader-teamcards.component.css']
 })
 export class TeamleaderTeamcardsComponent implements OnInit, OnDestroy {
-  students: any[] = []; // This type should be more specific if possible.
+  students: any[] = [];
   private teamIdSubscription: Subscription | undefined;
 
   constructor(private loginService: LoginService) {}
@@ -28,10 +28,10 @@ export class TeamleaderTeamcardsComponent implements OnInit, OnDestroy {
     }
   }
 
-  getStudents(teamId: number): void {
+  /*getStudents(teamId: number): void {
     this.loginService.getStudentsByTeamId(teamId).subscribe(students => {
       this.students = students;
     });
-  }
+  }*/
 }
 

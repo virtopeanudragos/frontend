@@ -111,12 +111,13 @@ export class LoginService {
 
   // Getter method for currentTeamId
   getCurrentTeamId(): Observable<number | undefined> {
-    // @ts-ignore
-    const storedId = this.localStorageService.getItem<number | undefined>('currentTeamId');
-    // @ts-ignore
-    this.currentTeamIdSubject.next(storedId);
+    const storedId = this.localStorageService.getItem('currentTeamId');
+    if (storedId !== null) {
+      this.currentTeamIdSubject.next(Number(storedId));
+    }
     return this.currentTeamId$;
   }
+
 
   // Setter method for currentUserId
   setCurrentUserId(id: number | undefined): void {

@@ -21,6 +21,10 @@ export class LoginService {
   private currentTeamIdSubject = new BehaviorSubject<number | undefined>(undefined);
   currentTeamId$ = this.currentTeamIdSubject.asObservable();
 
+  private currentUserIdSubject = new BehaviorSubject<number | undefined>(undefined);
+  currentUserId$ = this.currentUserIdSubject.asObservable();
+
+
 
   constructor(
     private http: HttpClient,
@@ -39,6 +43,13 @@ export class LoginService {
     );
   }
 
+  getMentorByName(name: string): Observable<any> {
+    return this.getMentors().pipe(
+      map(mentors => mentors.find(mentor => mentor.name === name))
+    );
+  }
+
+
   getStudents(): Observable<any[]> {
     return this.http.get<any[]>(this.studentsUrl);
   }
@@ -50,7 +61,6 @@ export class LoginService {
   getTeamLeaders(): Observable<any[]> {
     return this.getStudents().pipe(map(students => students.filter(student => student.leader)));
   }
-
 
   // Setter method for currentUserRole
   setCurrentUserRole(role: 'Student' | 'Team Leader' | 'Mentor' | undefined): void {
@@ -76,8 +86,11 @@ export class LoginService {
   // Setter method for currentUserName
   setCurrentUserName(name: string | null): void {
     this.currentUserNameSubject.next(name || undefined);
-    // @ts-ignore
-    this.localStorageService.setItem('currentUserName', name);
+    if (name !== null) {
+      this.localStorageService.setItem('currentUserName', name);
+    } else {
+      this.localStorageService.removeItem('currentUserName');
+    }
   }
 
   // Getter method for currentUserName
@@ -104,5 +117,26 @@ export class LoginService {
     this.currentTeamIdSubject.next(storedId);
     return this.currentTeamId$;
   }
+
+  // Setter method for currentUserId
+  setCurrentUserId(id: number | undefined): void {
+    this.currentUserIdSubject.next(id);
+    if (id !== undefined) {
+      this.localStorageService.setItem('currentUserId', id.toString());
+    } else {
+      this.localStorageService.removeItem('currentUserId');
+    }
+  }
+
+  // Getter method for currentUserId
+  getCurrentUserId(): Observable<number | undefined> {
+    const storedId = this.localStorageService.getItem('currentUserId');
+    if (storedId !== null) {
+      this.currentUserIdSubject.next(Number(storedId));
+    }
+    return this.currentUserId$;
+  }
+
+
 
 }

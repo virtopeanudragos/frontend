@@ -61,6 +61,13 @@ export class LoginCardComponent implements OnInit {
       this.loginService.getStudentByName(this.selectedName).subscribe(student => {
         if (student && student.team) {
           this.loginService.setCurrentTeamId(student.team.id);
+          this.loginService.setCurrentUserId(student.id);
+        }
+      });
+    } else if (this.selectedRole === 'Mentor') {
+      this.loginService.getMentorByName(this.selectedName).subscribe(mentor => {
+        if (mentor) {
+          this.loginService.setCurrentUserId(mentor.id);
         }
       });
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivitiesService } from '../activities.service';
+import { AnalyticsService} from "../analytics.service";
 
 @Component({
   selector: 'app-select-activity',
@@ -10,6 +11,7 @@ export class SelectActivityComponent implements OnInit {
   selectedActivity: string = '';
   names: string[] = [];
 
+
   constructor(private activitiesService: ActivitiesService) {}
 
   ngOnInit(): void {
@@ -18,6 +20,7 @@ export class SelectActivityComponent implements OnInit {
     });
 
     this.fetchActivities();
+    this.activitiesService.setCurrentActivity(this.selectedActivity);
   }
 
   fetchActivities(): void {
@@ -29,4 +32,6 @@ export class SelectActivityComponent implements OnInit {
   onActivitySelectionChange(): void {
     this.activitiesService.setCurrentActivity(this.selectedActivity);
   }
+
+
 }

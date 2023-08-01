@@ -1,6 +1,5 @@
 <div class="collapsible-container">
-  <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
-  <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
-  <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
-  <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
+  <div *ngFor="let student of students" class="table-row">
+    <app-collapsible-studentanalytics [student]="student" ]></app-collapsible-studentanalytics>
+  </div>
 </div>

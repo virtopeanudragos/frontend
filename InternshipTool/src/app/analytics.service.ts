@@ -17,8 +17,6 @@ export class AnalyticsService {
   public getStudent(userId: number): Observable<any>{
     return  this.http.get<any>(this.studentDetailsUrl + userId);
   }
-
-
 }
 
 

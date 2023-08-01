@@ -11,10 +11,31 @@ import {LoginService} from "./login.service";
 export class AnalyticsService {
 
   private studentDetailsUrl = 'http://localhost:8080/student/';
-  constructor(private http: HttpClient, private loginService: LoginService) {}
+
+  private currentSelectedActivity = new BehaviorSubject<string | undefined>(undefined);
+  currentSelectedActivity$ = this.currentSelectedActivity.asObservable();
+  constructor(private http: HttpClient, private loginService: LoginService, private localStorageService: LocalstorageService) {}
 
   public getStudent(userId: number): Observable<any>{
     return  this.http.get<any>(this.studentDetailsUrl + userId);
+  }
+
+  setCurrentActivity(activity: string | undefined): void {
+    this.currentSelectedActivity.next(activity);
+    if (activity !== undefined) {
+      this.localStorageService.setItem('currentActivity', activity.toString());
+    } else {
+      this.localStorageService.removeItem('currentActivity');
+    }
+  }
+
+  // Getter method for currentUserId
+  getCurrentActivity(): Observable<string | undefined> {
+    const currentActivity = this.localStorageService.getItem('currentUserId');
+    if (currentActivity !== null) {
+      this.currentSelectedActivity.next(String(currentActivity));
+    }
+    return this.currentSelectedActivity$;
   }
 }
 

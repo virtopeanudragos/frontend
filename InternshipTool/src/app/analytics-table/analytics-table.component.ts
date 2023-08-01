@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {AnalyticsService} from "../analytics.service";
 import {LoginService} from "../login.service";
+import {LocalstorageService} from "../localstorage.service";
+import {ActivitiesService} from "../activities.service";
 interface StudentAnalytics{
   grade : number,
   sessionDate: string,
@@ -17,9 +19,8 @@ interface StudentAnalytics{
 
 export class AnalyticsTableComponent implements OnInit, OnDestroy{
   gradesData: StudentAnalytics[] = [];
-  private studentAnalyticsSubscription: Subscription | undefined;
 
-  constructor(private analyticsService: AnalyticsService, private loginService: LoginService) {
+  constructor(private analyticsService: AnalyticsService, private loginService: LoginService, private activityService: ActivitiesService) {
   }
 
   ngOnInit(): void {
@@ -32,13 +33,22 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
       }
     )
 
+    let currentActivity: String;
+    const currentActivitySubscription = this.activityService.getCurrentActivity().subscribe(
+      // @ts-ignore
+      (activity: String) =>{
+        currentActivity = activity;
+      }
+    )
+
     // @ts-ignore
     this.analyticsService.getStudent(userId).subscribe( student =>
       this.gradesData = student.grades.map((grade: {grade: number, session: {date: string, activity: {name: string}}}) => ({
         grade: grade.grade,
         sessionDate: grade.session.date,
         activityName: grade.session.activity.name
-      }))
+        // @ts-ignore
+      })).filter(grade => grade.activityName === currentActivity)
     )
 
 
@@ -47,5 +57,4 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
 
   }
-
 }

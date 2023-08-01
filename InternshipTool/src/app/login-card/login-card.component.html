@@ -5,7 +5,7 @@
       <div class="custom-dropdown">
         <div class="dropdown-label">{{selectedRole || 'Select role'}}</div>
         <div class="dropdown-arrow"></div>
-        <select id="role" [(ngModel)]="selectedRole" (ngModelChange)="selectedRole=$event" required>
+        <select id="role" [(ngModel)]="selectedRole" (ngModelChange)="onRoleSelect()" required>
           <option value="Student">Student</option>
           <option value="Team Leader">Team Leader</option>
           <option value="Mentor">Mentor</option>

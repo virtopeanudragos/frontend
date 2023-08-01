@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { UserRoleService } from './user-role.service';
-import { UserProfileService } from "./user-profile.service";
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -38,7 +38,10 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { MentorSessionsComponent } from './mentor-sessions/mentor-sessions.component';
 import { CollapsibleMentorSessionsComponent } from './collapsible-mentor-sessions/collapsible-mentor-sessions.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { LoginService } from "./login.service";
+import { ActivitiesService } from "./activities.service";
+import { AddactivityFormComponent } from './addactivity-form/addactivity-form.component';
+import { LocalstorageService } from "./localstorage.service";
 
 
 const appRoute: Routes = [
@@ -81,20 +84,24 @@ const appRoute: Routes = [
     MentorAnalyticsRowComponent,
     NavigationBarComponent,
     MentorSessionsComponent,
-    CollapsibleMentorSessionsComponent
+    CollapsibleMentorSessionsComponent,
+    AddactivityFormComponent
   ],
 
 
   imports: [
     BrowserModule,
+    MatButtonModule,
+    MatDialogModule,
     FormsModule,
     RouterModule.forRoot(appRoute),
     BrowserAnimationsModule,
     HttpClientModule
   ],
   providers: [
-    UserRoleService,
-    UserProfileService
+    LoginService,
+    ActivitiesService,
+    LocalstorageService
   ],
   bootstrap: [AppComponent]
 })

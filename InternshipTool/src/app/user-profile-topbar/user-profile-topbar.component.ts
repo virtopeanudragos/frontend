@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserProfileService } from '../user-profile.service';
+import { LoginService } from '../login.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,20 +8,21 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./user-profile-topbar.component.css']
 })
 export class UserProfileTopbarComponent implements OnInit, OnDestroy {
-  userName: string ='';
-  private nameSub!: Subscription;
 
-  constructor(private userProfileService: UserProfileService) { }
+  userName: string | undefined;
+  private nameSubscription: Subscription | undefined;
 
-  ngOnInit() {
-    this.nameSub = this.userProfileService.getUserName().subscribe(name => {
+  constructor(private loginService: LoginService) { }
+
+  ngOnInit(): void {
+    this.nameSubscription = this.loginService.getCurrentUserName().subscribe(name => {
       this.userName = name;
     });
   }
 
-  ngOnDestroy() {
-    if (this.nameSub) {
-      this.nameSub.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.nameSubscription) {
+      this.nameSubscription.unsubscribe();
     }
   }
 

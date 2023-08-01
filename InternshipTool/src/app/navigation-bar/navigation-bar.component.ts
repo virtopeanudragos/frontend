@@ -1,38 +1,44 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router} from "@angular/router";
 import { Subscription } from 'rxjs';
-import { UserRoleService } from '../user-role.service';
+import {LoginService} from "../login.service";
+
+type Role = 'Student' | 'Team Leader' | 'Mentor' | undefined;
+
 
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css']
 })
-export class NavigationBarComponent implements OnInit, OnDestroy {
+export class NavigationBarComponent implements OnInit, OnDestroy{
+  userRole: Role ;
+  private roleSubscription: Subscription | undefined;
 
-  userRole: string = ''; // this should be set when the user logs in
-  roleSubscription!: Subscription;
-  constructor(private router: Router, private userRoleService: UserRoleService) {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService) { }
 
-  ngOnInit() {
-    this.roleSubscription = this.userRoleService.currentRole.subscribe(role => {
+  ngOnInit(): void {
+    this.roleSubscription = this.loginService.getCurrentUserRole().subscribe(role => {
       this.userRole = role;
     });
   }
 
-  ngOnDestroy() {
-    this.roleSubscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.roleSubscription) {
+      this.roleSubscription.unsubscribe();
+    }
   }
-  logout() {
 
-    // clear the user role when logging out
-    this.userRoleService.changeRole('');
+  navigateTo(route: string): void {
+    this.router.navigate([`/${route}`]);
+  }
 
+  logout(): void {
+    this.loginService.setCurrentUserRole(undefined);
     this.router.navigate(['/login']);
   }
 
-  navigateTo(route: string) {
-    this.router.navigate([route]);
-  }
 
 }

@@ -1,26 +1,31 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { UserRoleService } from '../user-role.service';
-import {Router} from "@angular/router";
+import { LoginService } from "../login.service";
+import { Subscription } from "rxjs";
+
+type Role = 'Student' | 'Team Leader' | 'Mentor' | undefined;
+
 @Component({
   selector: 'app-addteammember-button',
   templateUrl: './addteammember-button.component.html',
   styleUrls: ['./addteammember-button.component.css']
 })
-export class AddteammemberButtonComponent implements OnInit, OnDestroy {
+export class AddteammemberButtonComponent implements OnInit, OnDestroy{
 
-  userRole: string = ''; // this should be set when the user logs in
-  roleSubscription!: Subscription;
-  constructor(private userRoleService: UserRoleService) {}
+  userRole: Role ;
+  private roleSubscription: Subscription | undefined;
+
+  constructor(private loginService: LoginService) {}
 
   ngOnInit() {
-    this.roleSubscription = this.userRoleService.currentRole.subscribe(role => {
+    this.roleSubscription = this.loginService.getCurrentUserRole().subscribe(role => {
       this.userRole = role;
     });
   }
 
   ngOnDestroy() {
-    this.roleSubscription.unsubscribe();
+    if (this.roleSubscription) {
+      this.roleSubscription.unsubscribe();
+    }
   }
 
 }

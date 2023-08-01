@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserRoleService } from '../user-role.service';
-import { UserProfileService } from "../user-profile.service";
+import { LoginService } from '../login.service';
 
+type Role = 'Student' | 'Team Leader' | 'Mentor';
 
 @Component({
   selector: 'app-login-card',
@@ -10,44 +10,72 @@ import { UserProfileService } from "../user-profile.service";
   styleUrls: ['./login-card.component.css']
 })
 export class LoginCardComponent implements OnInit {
-  selectedRole: string = '';
+  selectedRole!: Role;
   selectedName: string = '';
   names: string[] = [];
-    constructor(
-    private userProfileService: UserProfileService,
-    private userRoleService: UserRoleService,
+
+  constructor(
+    private loginService: LoginService,
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.userProfileService.fetchNames().subscribe(names => {
-      this.names = names;
-    }, error => {
-      console.error('Error:', error);
-    });
+  ngOnInit() {}
+
+  onRoleSelect() {
+    this.names = [];
+
+    switch (this.selectedRole) {
+      case 'Student':
+        this.loginService.getStudents().subscribe(students => {
+          const nonLeaderStudents = students.filter(student => !student.leader);
+          this.names = nonLeaderStudents.map(student => student.name);
+        });
+        break;
+      case 'Team Leader':
+        this.loginService.getTeamLeaders().subscribe(leaders => {
+          this.names = leaders.map(leader => leader.name);
+        });
+        break;
+      case 'Mentor':
+        this.loginService.getMentors().subscribe(mentors => {
+          this.names = mentors.map(mentor => mentor.name);
+        });
+        break;
+      default:
+        break;
+    }
+
+    this.selectedName = '';
   }
 
   login() {
-    this.userProfileService.updateUserName(this.selectedName);
-    this.userRoleService.changeRole(this.selectedRole);
-
     if (!this.selectedRole || !this.selectedName) {
       alert('Please select both role and name');
       return;
     }
 
-    switch(this.selectedRole) {
-      case 'Student':
-        this.router.navigate(['/leader-team'], { queryParams: { name: this.selectedName } });
-        break;
-      case 'Team Leader':
-        this.router.navigate(['/leader-team'], { queryParams: { name: this.selectedName } });
-        break;
-      case 'Mentor':
-        this.router.navigate(['/mentor-teams'], { queryParams: { name: this.selectedName } });
-        break;
-      default:
-        break;
+    this.loginService.setCurrentUserRole(this.selectedRole);
+    this.loginService.setCurrentUserName(this.selectedName);
+
+    if (this.selectedRole === 'Student' || this.selectedRole === 'Team Leader') {
+      this.loginService.getStudentByName(this.selectedName).subscribe(student => {
+        if (student && student.team) {
+          this.loginService.setCurrentTeamId(student.team.id);
+        }
+      });
     }
-  }
+
+      switch (this.selectedRole) {
+        case 'Student':
+        case 'Team Leader':
+          this.router.navigate(['/leader-team'], {queryParams: {name: this.selectedName}});
+          break;
+        case 'Mentor':
+          this.router.navigate(['/mentor-teams'], {queryParams: {name: this.selectedName}});
+          break;
+        default:
+          break;
+      }
+    }
+
 }

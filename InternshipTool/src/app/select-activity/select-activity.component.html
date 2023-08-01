@@ -2,7 +2,7 @@
   <div class="custom-dropdown">
     <div class="dropdown-label">{{ selectedActivity || 'Select activity' }}</div>
     <div class="dropdown-arrow"></div>
-    <select id="name" [(ngModel)]="selectedActivity" required>
+    <select id="name" [(ngModel)]="selectedActivity" required (change)="onActivitySelectionChange()">
       <option *ngFor="let name of names" [value]="name">{{ name }}</option>
     </select>
   </div>

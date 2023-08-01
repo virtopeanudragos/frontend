@@ -7,7 +7,8 @@ import {ActivitiesService} from "../activities.service";
 interface StudentAnalytics{
   grade : number,
   sessionDate: string,
-  activityName: string
+  activityName: string,
+  feedback: string
 }
 
 @Component({
@@ -42,14 +43,21 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
     )
 
     // @ts-ignore
-    this.analyticsService.getStudent(userId).subscribe( student =>
-      this.gradesData = student.grades.map((grade: {grade: number, session: {date: string, activity: {name: string}}}) => ({
-        grade: grade.grade,
-        sessionDate: grade.session.date,
-        activityName: grade.session.activity.name
+    this.analyticsService.getStudent(userId).subscribe((student) => {
+      this.gradesData = student.grades
+        .map((grade: {
+          grade: number;
+          comment: string;
+          session: { date: string; activity: { name: string }; feedback: string };
+        }) => ({
+          grade: grade.grade,
+          sessionDate: grade.session.date,
+          activityName: grade.session.activity.name,
+          feedback: grade.comment
+        }))
         // @ts-ignore
-      })).filter(grade => grade.activityName === currentActivity)
-    )
+        .filter((grade) => grade.activityName === currentActivity && grade.feedback);
+    });
 
 
   }

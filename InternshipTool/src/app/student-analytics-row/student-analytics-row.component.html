@@ -1,5 +1,5 @@
 <div class="row-card">
-  <div class="session">{{ grade.activityName}}</div>
+  <div class="session">{{ grade.activityName }}</div>
   <div>
     <p>{{ grade.sessionDate }}</p>
   </div>
@@ -7,6 +7,5 @@
   <div>
     <p>{{ grade.grade }}</p>
   </div>
-  <button >Check</button>
+  <button (click)="openGradeDetailsDialog()">Check</button>
 </div>
-

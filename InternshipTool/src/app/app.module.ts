@@ -42,6 +42,8 @@ import { LoginService } from "./login.service";
 import { ActivitiesService } from "./activities.service";
 import { AddactivityFormComponent } from './addactivity-form/addactivity-form.component';
 import { LocalstorageService } from "./localstorage.service";
+import { CheckgradefeedbackDialogboxComponent } from './checkgradefeedback-dialogbox/checkgradefeedback-dialogbox.component';
+import {AnalyticsService} from "./analytics.service";
 
 
 const appRoute: Routes = [
@@ -85,7 +87,8 @@ const appRoute: Routes = [
     NavigationBarComponent,
     MentorSessionsComponent,
     CollapsibleMentorSessionsComponent,
-    AddactivityFormComponent
+    AddactivityFormComponent,
+    CheckgradefeedbackDialogboxComponent
   ],
 
 
@@ -101,7 +104,8 @@ const appRoute: Routes = [
   providers: [
     LoginService,
     ActivitiesService,
-    LocalstorageService
+    LocalstorageService,
+    AnalyticsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,12 @@
-<button class="add-card" *ngIf="userRole === 'Team Leader'">
+<button class="add-card" *ngIf="userRole === 'Team Leader'" (click)="openPopup()">
   <div class="plus">
     +
   </div>
 </button>
 
+<div *ngIf="showPopup" class="popup">
+  <h2>Select a student to add to your team</h2>
+  <div *ngFor="let student of studentsWithoutTeam">
+    {{student.name}} <button (click)="addStudentToTeam(student)">Add</button>
+  </div>
+</div>

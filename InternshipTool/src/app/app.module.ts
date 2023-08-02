@@ -44,6 +44,7 @@ import { AddactivityFormComponent } from './addactivity-form/addactivity-form.co
 import { LocalstorageService } from "./localstorage.service";
 import { CheckgradefeedbackDialogboxComponent } from './checkgradefeedback-dialogbox/checkgradefeedback-dialogbox.component';
 import {AnalyticsService} from "./analytics.service";
+import { StudentswithoutteamDialogboxComponent } from './studentswithoutteam-dialogbox/studentswithoutteam-dialogbox.component';
 
 
 const appRoute: Routes = [
@@ -88,7 +89,8 @@ const appRoute: Routes = [
     MentorSessionsComponent,
     CollapsibleMentorSessionsComponent,
     AddactivityFormComponent,
-    CheckgradefeedbackDialogboxComponent
+    CheckgradefeedbackDialogboxComponent,
+    StudentswithoutteamDialogboxComponent
   ],
 
 

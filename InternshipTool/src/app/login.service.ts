@@ -37,6 +37,22 @@ export class LoginService {
     );
   }
 
+
+  getStudentsWithoutTeam(): Observable<any[]> {
+    return this.getStudents().pipe(
+      map(students => students.filter(student => student.team === null))
+    );
+  }
+
+  addStudentToTeam(studentId: number, teamId: number): Observable<any> {
+    const url = `${this.studentsUrl}`;
+    const body = {
+      id: studentId,
+      teamId: teamId
+    };
+    return this.http.put(url, body);
+  }
+
   getStudentByName(name: string): Observable<any> {
     return this.getStudents().pipe(
       map(students => students.find(student => student.name === name))

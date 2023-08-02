@@ -21,6 +21,10 @@ export class AnalyticsService {
     return this.http.get<any>('http://localhost:8080/teams');
   }
 
+  public getSessions(): Observable<any>{
+    return this.http.get<any>('http://localhost:8080/session');
+  }
+
 
 }
 

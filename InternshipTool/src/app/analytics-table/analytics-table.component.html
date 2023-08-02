@@ -11,5 +11,8 @@
   <div *ngFor="let grade of gradesData" class="table-row">
     <app-student-analytics-row [grade]="grade"></app-student-analytics-row>
   </div>
+  <div *ngFor="let session of sessions" class="table-row">
+    <app-student-analytics-row [session]="session"></app-student-analytics-row>
+  </div>
 
 </div>

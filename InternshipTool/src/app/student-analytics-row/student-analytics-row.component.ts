@@ -6,6 +6,7 @@ import {
   CheckgradefeedbackDialogboxComponent
 } from "../checkgradefeedback-dialogbox/checkgradefeedback-dialogbox.component";
 
+
 @Component({
   selector: 'app-student-analytics-row',
   templateUrl: './student-analytics-row.component.html',
@@ -14,8 +15,19 @@ import {
 
 export class StudentAnalyticsRowComponent implements OnInit{
   @Input() grade: any;
+  @Input() session: any;
 
 ngOnInit() {
+  if(this.grade == null){
+    this.grade = {
+      grade : "-",
+      attendance : false,
+      sessionId: this.session.id,
+      sessionDate: this.session.date,
+      activityName: this.session.activity,
+      feedback: " "
+    }
+  }
 }
 
   constructor(private dialog: MatDialog) {}

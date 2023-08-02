@@ -7,9 +7,15 @@ import {ActivitiesService} from "../activities.service";
 interface StudentAnalytics{
   grade : number,
   attendance : boolean,
+  sessionId: number,
   sessionDate: string,
   activityName: string,
   feedback: string
+}
+interface SessionDetails{
+  id: number,
+  date: string,
+  activity: string
 }
 
 @Component({
@@ -23,6 +29,7 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
 
   @Input() id: any;
   gradesData: StudentAnalytics[] = [];
+  sessions: SessionDetails[] = [];
 
   constructor(private analyticsService: AnalyticsService, private loginService: LoginService, private activityService: ActivitiesService) {
   }
@@ -57,9 +64,10 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
         .map((grade: {
           grade: number;
           comment: string;
-          session: { date: string; activity: { name: string }; feedback: string };
+          session: {id: number, date: string; activity: { name: string }; feedback: string };
         }) => ({
           grade: grade.grade,
+          sessionId: grade.session.id,
           sessionDate: grade.session.date,
           activityName: grade.session.activity.name,
           feedback: grade.comment,
@@ -69,10 +77,27 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
         .filter((grade) => grade.activityName === currentActivity && grade.feedback);
     });
 
+    this.analyticsService.getSessions().subscribe( (session) =>{
+      this.sessions = session
+        .map((sessionData: {
+          id: number;
+          date: string;
+          activity: { name: string };
+        }) => ({
+          id: sessionData.id,
+          date: sessionData.date,
+          activity: sessionData.activity.name
+          // @ts-ignore
+        })).filter((session) => session.activity === currentActivity && !this.hasItemWithKeyAndValue(this.gradesData, "sessionId", session.id))
+    });
 
   }
 
   ngOnDestroy(): void {
 
+  }
+
+  hasItemWithKeyAndValue(arr: any[], key: string, value: number){
+    return arr.some(item => item[key] === value);
   }
 }

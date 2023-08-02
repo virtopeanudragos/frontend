@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject  } from 'rxjs';
-import { map, tap  } from 'rxjs/operators';
 import { LocalstorageService } from "./localstorage.service";
 import {LoginService} from "./login.service";
 
@@ -21,6 +20,8 @@ export class AnalyticsService {
   public getTeams(): Observable<any>{
     return this.http.get<any>('http://localhost:8080/teams');
   }
+
+
 }
 
 

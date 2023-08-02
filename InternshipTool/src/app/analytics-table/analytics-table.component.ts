@@ -6,6 +6,7 @@ import {LocalstorageService} from "../localstorage.service";
 import {ActivitiesService} from "../activities.service";
 interface StudentAnalytics{
   grade : number,
+  attendance : boolean,
   sessionDate: string,
   activityName: string,
   feedback: string
@@ -50,6 +51,8 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
 
     // @ts-ignore
     this.analyticsService.getStudent(userId).subscribe((student) => {
+      //@ts-ignore
+      const attendanceMap = new Map(student.attendances.map(attendance => [attendance.session.date, attendance.attended]));
       this.gradesData = student.grades
         .map((grade: {
           grade: number;
@@ -59,7 +62,8 @@ export class AnalyticsTableComponent implements OnInit, OnDestroy{
           grade: grade.grade,
           sessionDate: grade.session.date,
           activityName: grade.session.activity.name,
-          feedback: grade.comment
+          feedback: grade.comment,
+          attendance: attendanceMap.get(grade.session.date)  // change 'attended' to 'attendance'
         }))
         // @ts-ignore
         .filter((grade) => grade.activityName === currentActivity && grade.feedback);

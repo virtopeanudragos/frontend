@@ -3,10 +3,7 @@
     <app-select-activity></app-select-activity>
   </div>
 
-  <div class="team-cards">
-    <app-collapsible-mentor-sessions></app-collapsible-mentor-sessions>
-    <app-collapsible-mentor-sessions></app-collapsible-mentor-sessions>
-    <app-collapsible-mentor-sessions></app-collapsible-mentor-sessions>
+  <div class="team-cards" *ngFor="let team of teams">
+    <app-collapsible-mentor-sessions  [team]="team"></app-collapsible-mentor-sessions>
   </div>
-
 </div>

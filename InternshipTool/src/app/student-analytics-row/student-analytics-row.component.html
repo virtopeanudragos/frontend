@@ -3,8 +3,9 @@
   <div>
     <p>{{ grade.sessionDate }}</p>
   </div>
-  <div class="status">Attended</div>
-  <div>
+  <div class="status" [ngClass]="{ 'attended': grade.attendance, 'skipped': !grade.attendance }">
+    {{ grade.attendance ? 'Attended' : 'Skipped' }}
+  </div>  <div>
     <p>{{ grade.grade }}</p>
   </div>
   <button (click)="openGradeDetailsDialog()">Check</button>

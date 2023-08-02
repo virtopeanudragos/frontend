@@ -14,7 +14,6 @@
 .status {
   width: 100px;
   height: 40px;
-  background-color: #BAE8AC;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -39,4 +38,13 @@
 
 .session{
   margin-left: 30px;
+}
+
+
+.attended {
+  background-color: #BAE8AC;
+}
+
+.skipped {
+  background-color: #FBAABF;
 }

@@ -1,10 +1,10 @@
 <div class="row-card">
-  <div class="name">Student name</div>
+  <div class="name">{{ student.name }}</div>
   <div class="attendance">
-    Attendance: <input type="checkbox">
+    Attendance: <input type="checkbox" [(ngModel)]="student.attendance">
   </div>
   <div class="grade">
-    Grade: <input type="text" maxlength="4" pattern="^\d+(\.\d{1,2})?$" placeholder="0.00">
+    Grade: <input type="text" maxlength="4" pattern="^\d+(\.\d{1,2})?$" placeholder="0.00" [(ngModel)]="student.grade">
   </div>
   <button>Feedback</button>
 </div>

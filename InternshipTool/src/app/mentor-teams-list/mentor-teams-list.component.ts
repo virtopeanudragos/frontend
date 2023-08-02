@@ -12,12 +12,6 @@ interface Team{
   styleUrls: ['./mentor-teams-list.component.css']
 })
 export class MentorTeamsListComponent implements OnInit{
-  isDropdownOpen1 = false;
-  isDropdownOpen2 = false;
-  isDropdownOpen3 = false;
-  isDropdownOpen4 = false;
-
-
   teams: Team[] = [];
 
   constructor(private analyticsService: AnalyticsService) {

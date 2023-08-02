@@ -13,6 +13,7 @@ export class ActivitiesService {
 
   private currentSelectedActivity = new BehaviorSubject<string | undefined>(undefined);
   currentSelectedActivity$ = this.currentSelectedActivity.asObservable();
+
   constructor(
     private http: HttpClient,
     private localStorageService: LocalstorageService) { }
@@ -23,6 +24,11 @@ export class ActivitiesService {
 
   createActivity(activityData: any): Observable<any> {
     return this.http.post<any>(this.activitiesUrl, activityData);
+  }
+
+  deleteActivity(id: number): Observable<any> {
+    const url = `${this.activitiesUrl}/${id}`;
+    return this.http.delete<any>(url);
   }
 
 

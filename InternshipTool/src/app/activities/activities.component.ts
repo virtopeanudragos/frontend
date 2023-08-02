@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-activities',
@@ -7,5 +7,14 @@ import {Component, Input} from '@angular/core';
 })
 export class ActivitiesComponent {
   @Input() activity: any;
+  @Output() deleteActivityEvent = new EventEmitter<any>();
+  isActivityCollapsibleVisible: boolean = false;
 
+  toggleAnalyticsTable(): void {
+    this.isActivityCollapsibleVisible = !this.isActivityCollapsibleVisible;
+  }
+
+  deleteActivity(): void {
+    this.deleteActivityEvent.emit(this.activity);
+  }
 }

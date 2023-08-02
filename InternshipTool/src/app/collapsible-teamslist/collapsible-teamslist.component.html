@@ -1,14 +1,13 @@
 <div class="collapsible-container">
 
   <div class="collapsible-rectangle" (click)="toggleAnalyticsTable()">
-    <div class="student-name">{{ studentName }}</div>
+    <div class="student-name">{{ teamName }}</div>
   </div>
   <div class="analytics-table-container" [ngClass]="{ 'expanded': isAnalyticsTableVisible }">
     <ng-container *ngIf="isAnalyticsTableVisible">
-      <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
-      <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
-      <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
-      <app-collapsible-studentanalytics></app-collapsible-studentanalytics>
+      <div *ngFor="let student of team.students" class="table-row">
+        <app-collapsible-studentanalytics [student] = "student"></app-collapsible-studentanalytics>
+      </div>
     </ng-container>
   </div>
 

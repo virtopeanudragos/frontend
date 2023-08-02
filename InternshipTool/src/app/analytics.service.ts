@@ -17,6 +17,10 @@ export class AnalyticsService {
   public getStudent(userId: number): Observable<any>{
     return  this.http.get<any>(this.studentDetailsUrl + userId);
   }
+
+  public getTeams(): Observable<any>{
+    return this.http.get<any>('http://localhost:8080/teams');
+  }
 }
 
 

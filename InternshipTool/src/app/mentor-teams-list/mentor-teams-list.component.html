@@ -1,6 +1,5 @@
 <div class="collapsible-container">
-  <app-collapsible-teamslist></app-collapsible-teamslist>
-  <app-collapsible-teamslist></app-collapsible-teamslist>
-  <app-collapsible-teamslist></app-collapsible-teamslist>
-  <app-collapsible-teamslist></app-collapsible-teamslist>
+  <div *ngFor="let team of teams" class="table-row">
+    <app-collapsible-teamslist [team]="team"></app-collapsible-teamslist>
+  </div>
 </div>

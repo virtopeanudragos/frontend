@@ -12,8 +12,18 @@ export class MentorActivitiesComponent implements OnInit {
   constructor(private activitiesService: ActivitiesService) { }
 
   ngOnInit(): void {
+    this.getActivities();
+  }
+
+  getActivities(): void {
     this.activitiesService.getActivities().subscribe(activities => {
       this.activities = activities;
+    });
+  }
+
+  deleteActivity(activity: any): void {
+    this.activitiesService.deleteActivity(activity.id).subscribe(() => {
+      this.getActivities();
     });
   }
 }

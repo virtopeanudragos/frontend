@@ -1,4 +1,13 @@
-<div class="activity-card">
-  <h2>{{ activity.name }}</h2>
-  <h2>{{ activity.description }}</h2>
+<div class="collapsible-container">
+
+  <div class="collapsible-rectangle" (click)="toggleAnalyticsTable()">
+    <div class="activity-name">{{ activity.name }}</div>
+    <button class="delete-button" (click)="deleteActivity(); $event.stopPropagation();">Delete</button>
+  </div>
+  <div class="activity-description-container" [ngClass]="{ 'expanded': isActivityCollapsibleVisible }">
+    <ng-container *ngIf="isActivityCollapsibleVisible">
+      <h2 class="activity-description-text"> {{ activity.description }}</h2>
+    </ng-container>
+  </div>
+
 </div>

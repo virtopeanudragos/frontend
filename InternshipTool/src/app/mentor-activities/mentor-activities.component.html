@@ -1,7 +1,7 @@
 <div class="container">
 
   <div *ngFor="let activity of activities" class="activities">
-    <app-activities [activity]="activity"></app-activities>
+    <app-activities [activity]="activity" (deleteActivityEvent)="deleteActivity($event)"></app-activities>
   </div>
 
 
